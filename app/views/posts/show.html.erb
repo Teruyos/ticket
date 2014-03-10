@@ -1,8 +1,19 @@
-<h1><%= @post.title %></h1>
+<h2><%= @post.title %></h2>
+
+<% if @post.category_id.nil? %>
+<h3>カテゴリ</h3>
+
+  <p>カテゴリが登録されていません</p>
+<% else %>
+  <h3>カテゴリ：<%= @post.category_id %></h3>
+  <p><%= @cat.name %></p>
+<% end %>
+
+<h3>Content</h3>
 
 <p><%= @post.content %></p>
 
-<h2>Comments</h2>
+<h3>Comments</h3>
 <ul>
 <% if @post.comments.any? %>
 <% @post.comments.each do |comment| %>
@@ -19,7 +30,7 @@
 <% end %>
 </ul>
 
-<h2>Add a comment</h2>
+<h3>Add a comment</h3>
 <%= form_for([@post, @comment]) do |f| %>
 
 <% if @comment.errors.any? %>
@@ -39,11 +50,21 @@
   <%= f.text_area :body, :rows => 5 %>
 </div>
 <div class="actions">
-  <%= f.submit %>
+
+<%= image_tag @post.avatar.url(:medium) %><br>
+
+<%= f.submit %>
 </div>
 <% end %>
 
-<%= link_to 'home', posts_path %>
+<div id='user_nav'>
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path %> or
+    <%= link_to "Sign in", new_user_session_path %>
+  <% end %>
+</div>
 
 <script>
 $(function() {  
