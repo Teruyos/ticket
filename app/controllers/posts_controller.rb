@@ -8,7 +8,7 @@ class PostsController < ApplicationController
         @search_form = SearchForm.new (params[:search_form])
         
         @posts = Post.all(:order => "created_at DESC")
-        @postspage = Post.scoped(:order => "created_at ASC").page(params[:page]).per(2)
+        @posts = Post.scoped(:order => "created_at ASC").page(params[:page]).per(2)
         
         year = Time.now.year.to_s
         month = Time.now.month.to_s
@@ -28,8 +28,8 @@ class PostsController < ApplicationController
             from = Date::new(fyear.to_i, fmonth.to_i, fday.to_i)
             to = Date::new(tyear.to_i, tmonth.to_i, tday.to_i)
             
-            @postspage = Post.scoped(:order => "created_at ASC", :conditions => {:updated_at => from...to}).page(params[:page]).per(2)
-            @postspage = @postspage.content_or_title_matches @search_form.q
+            @posts = Post.scoped(:order => "created_at ASC", :conditions => {:updated_at => from...to}).page(params[:page]).per(2)
+            @posts = @posts.content_or_title_matches @search_form.q
             
         end
         

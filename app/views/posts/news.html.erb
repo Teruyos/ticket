@@ -2,14 +2,14 @@
 
 <div id="newsArea">
 
-<p><%= paginate @postspage %></p>
+<p><%= paginate @posts %></p>
 
-<p>ページ:<%= @postspage.current_page %> / <%= @postspage.num_pages %>
-<%= @postspage.total_count %>件中<%= @postspage.offset_value %>
-～<%= @postspage.offset_value + @postspage.length %>件を表示しています。</p>
+<p>ページ:<%= @posts.current_page %> / <%= @posts.num_pages %>
+<%= @posts.total_count %>件中<%= @posts.offset_value %>
+～<%= @posts.offset_value + @posts.length %>件を表示しています。</p>
 
 <p class="bbold16">登録件数:
-<%= @posts.size %> 件</p>
+<%= @posts.total_count %> 件</p>
 
 <%# 現在時刻取得 %>
 <% t = Time.now %>
