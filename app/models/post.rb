@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
     
     default_scope :order => 'created_at ASC'
-    paginates_per 5
+    # paginates_per 5
 
   attr_accessible :content, :title
 
