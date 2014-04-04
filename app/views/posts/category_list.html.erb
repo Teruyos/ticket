@@ -1,4 +1,8 @@
+<div id="main" class="floatwrap">
+
 <h2>カテゴリ一覧</h2>
+
+<div id="newsArea">
 
 <p class="bbold16">登録数:
 <%= @categories.size %></p>
@@ -32,3 +36,13 @@
 
   </ul>
 </div>
+
+</div><!-- end newsArea --> 
+
+  </div><!-- end div#main -->
+
+<% content_for :extend_index do %>
+
+<%= render 'news_sidebar' %>
+
+<% end %>

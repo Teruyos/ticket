@@ -1,0 +1,47 @@
+<h2>お問い合わせフォーム</h2>
+
+<%= form_for @contact, :url => contact_path do |form| %>
+
+<table border="0" cellpadding="0" cellspacing="0" class="post">
+
+<tr>
+<th>内容</th>
+<td>
+<select name="example1">
+<option value="サンプル1">ボランティア活動について</option>
+<option value="サンプル2">会費について</option>
+<option value="サンプル3">活動について</option>
+<option value="サンプル4">アイディアやご意見</option>
+<option value="サンプル5">その他</option>
+</select>
+</td>
+</tr>
+
+<tr>
+  <th><%= form.label :name %></th>
+  <td><%= form.text_field :name %></td>
+</tr>
+
+<tr>
+  <th><%= form.label :email %></th>
+  <td><%= form.text_field :email %></td>
+</tr>
+
+<tr>
+  <th><%= form.label :content %></th>
+  <td><%= form.text_area :content %></td>
+</tr>
+
+</table>
+
+<div class="actions">
+    <%= form.submit "メール送信" %>
+</div>
+
+<% end %>
+
+<% content_for :extend_index do %>
+
+<%= render 'top_sidebar' %>
+
+<% end %>

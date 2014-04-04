@@ -23,6 +23,16 @@ Blog::Application.routes.draw do
   match 'cat_list' => 'posts#cat_list'
   
   match 'category_list' => 'posts#category_list'
+  
+  match 'contact' => 'contact#new', :as => 'contact', :via => :get
+  match 'contact' => 'contact#create', :as => 'contact', :via => :post
+  match 'contact:notice' => 'contact#index'
+  
+  match 'news' => 'posts#news'
+  match 'about' => 'posts#about'
+  match 'access' => 'posts#access'
+  match 'report' => 'posts#report'
+  match 'sanka' => 'posts#sanka'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

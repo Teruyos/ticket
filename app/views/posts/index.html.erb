@@ -1,29 +1,101 @@
-<div id="notice"><%= notice %></div>
+<% content_for :extend_index do %>
+<div id "carousel-Area">
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:900px">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+      </ol>
+ 
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner">
+        <div class="item active">
+          <%= image_tag('pic1.jpg') %>
+          <div class="carousel-caption">
+            写真1
+          </div>
+        </div>
+        <div class="item">
+           <%= image_tag('pic2.jpg', :size => '900x150') %>
+          <div class="carousel-caption">
+            写真2
+          </div>
+        </div>
+        <div class="item">
+           <%= image_tag('pic3.jpg', :size => '900x150') %>
+          <div class="carousel-caption">
+            写真3
+          </div>
+        </div>
+      </div>
+ 
+      <!-- Controls -->
+      <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </a>
+      <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </a>
+    </div>
+ 
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</div>
 
-<h2>Posts</h2>
+  <% end %>
 
-<%= form_for @search_form, :url => posts_path,
-  :html => {:method => :get} do |f| %>
 
-  <%= select_date(@search_date, :prefix=>"search_from") %>
-  ～
-  <%= select_date(@search_date, :prefix=>"search_to") %>
-  
-  <%= f.search_field :q %>
-  <%= f.submit '検索' %>
+<div id="newsArea">
+
+
+<%# 現在時刻取得 %>
+<% t = Time.now %>
+<%# 整数に変換 %>
+<% timeInteger = t.tv_sec %>
+<%# NEWを出す日数を設定 %>
+<% newd = 7 %>
+<%# 経過時間を計算(設定日数×24時間) %>
+<% newd = newd * 86400 %>
+
+
+<div class="news index">
+
+<ul>
+<h2>NEWS</h2>
+
+<% @posts.each do |post| %>
+<li id="post_<%= post.id %>">
+
+<%# Post作成時間を取得（整数に変換） %>
+<% pt = post.created_at.tv_sec %>
+<%# Post作成時間から経過時間を計算 %>
+<% pt = timeInteger - pt %>
+
+
+<%# 経過時間がNEWを出す日数以下ならNEWを表示 %>
+<% if pt < newd then %>
+<%= image_tag 'NEW.gif '%>
 <% end %>
 
-<p><%= paginate @postspage %></p>
+<%= post.created_at.strftime('%y/%m/%d') %>
+<%# .strftime('%Y年%m月%d日 %H:%M:%S') %>
 
-<p>ページ:<%= @postspage.current_page %> / <%= @postspage.num_pages %></p>
-<p><%= @postspage.total_count %>件中<%= @postspage.offset_value %>
-～<%= @postspage.offset_value + @postspage.length %>件を表示しています。</p>
+<%= link_to post.title, post_path(post) %>
+<%= post.categories.name%>
 
+</li>
+<% end %>
+</ul>
+</div>
 
-<%= render 'list' %>
+<div class="news">
+<iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2Fpages%2F%25E7%2589%25B9%25E5%25AE%259A%25E9%259D%259E%25E5%2596%25B6%25E5%2588%25A9%25E6%25B4%25BB%25E5%258B%2595%25E6%25B3%2595%25E4%25BA%25BA-%25E3%2583%2592%25E3%2583%259E%25E3%2583%25A9%25E3%2583%25A4%25E4%25BF%259D%25E5%2585%25A8%25E5%258D%2594%25E4%25BC%259A%2F335900309766232&amp;width&amp;height=290&amp;colorscheme=light&amp;show_faces=true&amp;header=true&amp;stream=false&amp;show_border=true" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:290px;" allowTransparency="true"></iframe></div>
 
-<%= form_for @search_form, :url => posts_path,
-  :html => {:method => :get} do |f| %>
-  <%= f.search_field :q %>
-  <%= f.submit '検索' %>
+</div><!-- end div#newsArea --> 
+
+<% content_for :extend_index do %>
+
+<%= render 'top_sidebar' %>
+
 <% end %>

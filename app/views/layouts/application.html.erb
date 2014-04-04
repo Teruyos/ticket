@@ -20,19 +20,40 @@
   <body>
 
   <div id="header">
+   <div class="header_txt"><h1>ネパールと日本をつなぐ　ヒマラヤ保全協会</h1></div>
+  
   <div id="headerArea">
-    <div class="header_txt"><h1>侍エンジニア塾H1タグ</h1></div>
 
-    <div class="header_logo"><%= image_tag('logo.gif', :size => '120x40') %></div>
+  <ul id="headersubArea">
+  
+    <li class="header_logo"><%= link_to image_tag('logo.gif', :size => '120x120'), posts_path %></li>
+    <li class="header_navi">
+      <ul>
+        <li>English</li>
+        <li><%= link_to 'アクセス', access_path %></li>
+        <li><%= link_to 'お問い合わせ', contact_path %></li>
+        <li>サイトマップ</li>
+      </ul>
+      <ul>
+       <li class="head_title">ヒマラヤ保全協会は、ネパールにて地域住民が主体になった植林事業に取り組んでいます。</li>
+      </ul>
+      <ul>
+        <li>
+          <%= link_to image_tag('email.jpg' , :size => '250x120'), contact_path %></li>
+        </li>
+      </ul>
+    </li>
+    </ul>
+  
 
     <div id="gnavi">
      <ul id="globalnavi">
       <li><%= link_to 'Home', posts_path %></li>
-      <li><%= link_to '新規投稿', new_post_path %></li>
-      <li><%= link_to 'カテゴリ一覧', category_list_path %></li>
-      <li><%= link_to '日別アーカイブ', day_path %></li>
-      <li><%= link_to '月別アーカイブ', month_path %></li>
-      <li><%= link_to '年別アーカイブ', year_path %></li>
+      <li><%= link_to 'News', news_path %></li>
+      <li><%= link_to '私たちについて', about_path %></li>
+      <li><%= link_to '支援活動', report_path %></li>
+      <li><%= link_to '参加する', sanka_path %></li>
+      <li><%= link_to '募金・寄付', year_path %></li>
       </ul>
     </div>
     <!-- end div#gnavi -->
@@ -40,26 +61,21 @@
   </div><!-- end div#headerArea -->
   </div><!-- end div#header -->
 
-
   <div id="content" class="floatwrap">
   <div id="contentArea" class="floatwrap">
 
-  <div id="main" class="floatwrap">
+<%= yield :extend_index %>
+
+ <div id="main" class="floatwrap">
 
 <%= yield %>
 
   </div><!-- end div#main -->
 
-  <div id="side" class="floatwrap">
-  <p>sidebar</p>
-  </div><!-- end div#side -->
-
+<%= yield :extend_index2 %>
 
   </div><!-- end div#contentArea -->
   </div><!-- end div#content -->
-
-    </div> <!-- /container -->
-
 
   <div id="footer">
   <div id="footerArea" class="floatwrap">

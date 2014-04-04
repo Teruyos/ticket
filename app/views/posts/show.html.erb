@@ -1,13 +1,26 @@
+  <div id="main" class="floatwrap">
+
+<%= link_to 'TOP', posts_path %>>NEWS><%= @cat.name %><%= @post.title %>
+
+<h2>NEWS</h2>
+
+
+<div id="newsArea">
+
 <h2><%= @post.title %></h2>
 
 <% if @post.category_id.nil? %>
 <h3>カテゴリ</h3>
 
   <p>カテゴリが登録されていません</p>
+
 <% else %>
+
   <h3>カテゴリ：<%= @post.category_id %></h3>
   <p><%= @cat.name %></p>
+
 <% end %>
+
 
 <h3>Content</h3>
 
@@ -20,8 +33,8 @@
 <li id="comment_<%= comment.id %>">
 <%= comment.body %> (by <%= comment.commenter %>)
 <%= link_to 'delete', [comment.post, comment], :confirm => 'Sure?',
-                            				   :method => :delete,
-                           					   :remote => true %>
+                                       :method => :delete,
+                                       :remote => true %>
 
 </li>
 <% end %>
@@ -75,3 +88,14 @@ $(function() {
 });
 </script>
 
+
+</div><!-- end newsArea --> 
+
+  </div><!-- end div#main -->
+
+
+<% content_for :extend_index do %>
+
+<%= render 'news_sidebar' %>
+
+<% end %>

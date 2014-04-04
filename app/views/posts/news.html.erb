@@ -1,3 +1,13 @@
+<h2>NEWS一覧</h2>
+
+<div id="newsArea">
+
+<p><%= paginate @postspage %></p>
+
+<p>ページ:<%= @postspage.current_page %> / <%= @postspage.num_pages %>
+<%= @postspage.total_count %>件中<%= @postspage.offset_value %>
+～<%= @postspage.offset_value + @postspage.length %>件を表示しています。</p>
+
 <p class="bbold16">登録件数:
 <%= @posts.size %> 件</p>
 
@@ -10,40 +20,50 @@
 <%# 経過時間を計算(設定日数×24時間) %>
 <% newd = newd * 86400 %>
 
-<div class="news">
-<ul>
+<div id="news">
+<table class="sample">
+<tr>
+	<th>作成日</th>
+	<th>更新日</th>
+	<th>タイトル</th>
+	<th>category_id</th>
+	<th>カテゴリー名</th>
+</tr>
+
+
 <% @posts.each do |post| %>
-<li id="post_<%= post.id %>">
+<tr id="post_<%= post.id %>">
 
 <%# Post作成時間を取得（整数に変換） %>
 <% pt = post.created_at.tv_sec %>
 <%# Post作成時間から経過時間を計算 %>
 <% pt = timeInteger - pt %>
 
-作成日:
+<td>
 <%= post.created_at.strftime('%m/%d') %>
 <%# .strftime('%Y年%m月%d日 %H:%M:%S') %>
+</td>
 
-更新日
+<td>
 <%= post.updated_at.strftime('%m/%d %H:%M') %>
+</td>
 
+<td>
 <% time_ago_in_words(post.created_at) %>
-
 <%# 経過時間がNEWを出す日数以下ならNEWを表示 %>
 <% if pt < newd then %>
 <%= image_tag 'NEW.gif '%>
 <% end %>
 
 <%= link_to post.title, post_path(post) %> (<%= post.comments.size %>)
-<%= @cat.name %>
+</td>
 
-<%= link_to 'Edit', edit_post_path(post) %>
-<%= link_to 'Delete', post, :confirm => 'Sure?',
-                            :method => :delete,
-                            :remote => true %>
-</li>
+<td><%= post.category_id %></td>
+<td><%= @cat.name %></td>
+</tr>
 <% end %>
-</ul>
+
+</table>
 </div>
 
 <script>
@@ -58,3 +78,13 @@ $(function() {
 
 });
 </script>
+
+<% content_for :extend_index do %>
+
+<%= render 'news_sidebar' %>
+
+<% end %>
+
+</div><!-- end newsArea --> 
+
+

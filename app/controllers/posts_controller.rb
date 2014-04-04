@@ -3,35 +3,47 @@
 class PostsController < ApplicationController
     before_filter :authenticate_user!
     
-    def index
-    @search_form = SearchForm.new (params[:search_form])
-
+    
+    def news
+        @search_form = SearchForm.new (params[:search_form])
+        
         @posts = Post.all(:order => "created_at DESC")
         @postspage = Post.scoped(:order => "created_at ASC").page(params[:page]).per(2)
-
-    year = Time.now.year.to_s
-    month = Time.now.month.to_s
-    day = Time.now.day.to_s
-    
-    @search_date = Date::new(year.to_i, month.to_i, day.to_i)
-    
-    if @search_form.q.present?
-      fyear = params[:search_from][:year]
-      fmonth = params[:search_from][:month]
-      fday = params[:search_from][:day]
-
-      tyear = params[:search_to][:year]
-      tmonth = params[:search_to][:month]
-      tday = params[:search_to][:day]
-
-      from = Date::new(fyear.to_i, fmonth.to_i, fday.to_i)
-      to = Date::new(tyear.to_i, tmonth.to_i, tday.to_i)
-
-      @postspage = Post.scoped(:order => "created_at ASC", :conditions => {:updated_at => from...to}).page(params[:page]).per(2)
-      @postspage = @postspage.content_or_title_matches @search_form.q
+        
+        year = Time.now.year.to_s
+        month = Time.now.month.to_s
+        day = Time.now.day.to_s
+        
+        @search_date = Date::new(year.to_i, month.to_i, day.to_i)
+        
+        if @search_form.q.present?
+            fyear = params[:search_from][:year]
+            fmonth = params[:search_from][:month]
+            fday = params[:search_from][:day]
+            
+            tyear = params[:search_to][:year]
+            tmonth = params[:search_to][:month]
+            tday = params[:search_to][:day]
+            
+            from = Date::new(fyear.to_i, fmonth.to_i, fday.to_i)
+            to = Date::new(tyear.to_i, tmonth.to_i, tday.to_i)
+            
+            @postspage = Post.scoped(:order => "created_at ASC", :conditions => {:updated_at => from...to}).page(params[:page]).per(2)
+            @postspage = @postspage.content_or_title_matches @search_form.q
+            
+        end
+        
+        @post = Post.find(1)
+        @cateories = Category.all
+        @cat = Category.find_by_id(@post.category_id)
+            
     end
 
-    end
+
+
+def index
+    @posts = Post.all(:order => "created_at DESC")
+end
 
 
   def day
@@ -66,6 +78,7 @@ class PostsController < ApplicationController
   def year
     @posts = Post.all(:order => "created_at DESC")
     @post_years = @posts.group_by { |t| t.created_at.beginning_of_year }
+    
   end
 
   def year_list
@@ -119,8 +132,10 @@ class PostsController < ApplicationController
     
     def category_list
         @categories = Post.find(:all).group_by(&:category_id)
-        @post = Post.scoped(:order => "created_at DESC").page(params[:page]).per(2)
+        @post = Post.scoped(:order => "created_at DESC").page(params[:page]).per(10)
         @post_categories = @post.group_by(&:category_id)
+       
+
     end
     
     def cat_list
@@ -132,5 +147,6 @@ class PostsController < ApplicationController
             @posts = Post.find(:all, :conditions => { :category_id => cat })
             @cat = Category.find(cat)
         end
+
     end
 end

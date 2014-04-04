@@ -31,7 +31,7 @@ body {
 margin: 0;
 padding: 0;
 font: 13px/1.5 verdana, "ＭＳ Ｐゴシック", "MS PGothic", Sans-Serif;
-background: url(/assets/bg.jpg) repeat-x;
+
 
 *font-size: small;
 *font: x-small;
@@ -177,8 +177,8 @@ border: none;
 div#header{
   padding:0;
   margin:0 auto;
-  width:100%;
-  height:158px;
+  width:950px;
+  height:180px;
 
 }
 
@@ -186,8 +186,31 @@ div#headerArea{
   padding:0;
   margin:0 auto;
   width:950px;
-  height:158px;
+  height:130px;
 
+}
+
+ul#headersubArea{
+  padding:0;
+  margin:0 auto;
+  width:950px;
+  height:130px;
+
+}
+
+div#carousel-Area{
+  margin:0 auto;
+  width:950px;
+  height: 200px;
+}
+
+.active{
+  height: 200px;
+}
+
+div.carousel{
+  margin: 0 auto;
+  padding: 0 0 20px 0;
 }
 
 /* ===== ヘッダーH1 ===== */
@@ -212,16 +235,37 @@ div.header_txt h1{
 
 
 /*ロゴ*/
-div.header_logo {
-  clear: both;
+li.header_logo {
   float: left; 
   margin: 0;
-  padding: 0 0 0 0;
+  padding: 0 0 0 20px;
   border: none;
-  width: 330px;
-  height: 76px;
+  width: 250px;
+  height: 120px;
 
 }
+
+.head_title{
+  font-weight:bold;
+  color:red;
+}
+
+/*ヘッダーナビ*/
+li.header_navi {
+  float: right; 
+  margin: 0;
+  padding: 0 0 0 20px;
+  border: none;
+  width: 650px;
+  height: 120px;
+}
+
+li.header_navi li{
+  float: right;
+  padding: 2px 30px 2px;
+
+}
+
 
 /*お問い合わせ*/
 div.header_contact {
@@ -252,20 +296,27 @@ div.header_login {
 
 div#header div#gnavi {
   clear: both;
-  margin: 0;
-  padding: 20px 0 0 0 ;
-  float: left;
-  width: 950px;
-  text-align: left; 
+  margin: 0 auto;
+  padding: 0 0 0 0 ;
+  width: 100%;
+  text-align: center; 
+  background-color: green;
+  border-radius:5px;
 
 }
 
-div#header ul#globalnavi {
-  clear: both;
-  margin: 0;
-  padding: 0;
-  width: 950px;
+div#header div#gnavi a:link{
+color: yellow;
+}
 
+div#header div#gnavi a:visited {
+color: lime;
+}
+
+
+div#header ul#globalnavi {
+    clear: both;
+    text-align: center;
 }
 
 div#header ul#globalnavi:after {
@@ -279,17 +330,18 @@ div#header ul#globalnavi:after {
 }
 
 div#header ul#globalnavi li {
+  width: 14.4%;
   margin: 0;
-  padding: 0 10px;
+  padding: 10px;
   float: left;
   font-size: 116%;
   text-align: center;
-}
+  border-right: 1px solid #ccc;
+} 
 
-div#header ul#globalnavi a {
-  display:block;
+div#header ul#globalnavi li:last-child {
+    border-right: none;
 }
-
 
 /* ===== ぱんくずリスト ===== */
 div#pankuzu{
@@ -323,7 +375,7 @@ div#content{
 div#contentArea{
   padding:0;
   margin:0 auto;
-  width:950px;
+  width:950px
 
 }
 
@@ -380,6 +432,53 @@ div#main img{
   margin: 0;
 }
 
+div#news td{
+  padding: 2px 5px;
+}
+
+table.sample{
+    margin: 0 auto;
+    border-top:1px solid #663300;
+    border-left:1px solid #663300;
+    border-collapse:collapse;
+    border-spacing:0;
+    background-color:#ffffff;
+    empty-cells:show;
+}
+.sample th{
+    border-right:1px solid #663300;
+    border-bottom:1px solid #663300;
+    color:#330000;
+    background-color:#ff99cc;
+    background-position:left top;
+    padding:0.3em 1em;
+    text-align:center;
+}
+
+.about th{
+  width: 40%;
+}
+.about select{
+  width: 100%;
+}
+
+.sample td{
+    border-right:1px solid #663300;
+    border-bottom:1px solid #663300;
+    padding:0.3em 1em;
+}
+
+
+
+
+.dotate_content{
+  overflow: hidden;
+}
+
+.dotate_content div{
+  float: left;
+}
+
 
 /* ===== サイドバー ===== */
 
@@ -388,42 +487,98 @@ div#side{
   padding: 0;
   margin: 0;
   width: 200px;
-  background: #DDDDDD;
   text-align: right;
   min-height: 400px;
   text-align: left;
-
+  
 }
+
+div#side div{
+  background: #99ff99;
+  margin-bottom: 10px;
+  border-radius:5px;
+}
+
 
 div#side p{
   line-height: 26px;
   padding: 5px 10px ;
+  font-family: "ヒラギノ丸ゴ ProN W4";
+  font-size: 120%; 
+  font-weight: bold;
+  border-bottom: 1px dotted #B1B6B9;
+}
 
+div#side p:last-child {
+    border-bottom: none;
 }
 
 
+div#side img{
+  padding: 5px;
+  text-align: center;
+}
+
+div#side li{
+  font-family: "Meiryo";
+  margin: 5px;
+  font-size: 130%; 
+
+}
+
+div#side a:link {
+  color: red;
+  font-family: "Meiryo", bold;
+}
+
+div#side a:visited {
+  color: black;
+  font-family: "Meiryo", bold;
+}
+
+.donate_content .image{
+  text-align: center;
+}
+
+.donate_content .image2{
+  clear:both;
+  float: left;
+  margin: 0 10px 10px 0;
+}
+
+.donate_content h3{
+  clear:both;
+}
+
 /* ===== トップお知らせ ===== */
 
-div#news{
+div#newsArea{
   clear: both;
   float: left;
   margin: 0;
   padding:0;
-  width: 700px;
+  width: 720px;
 }
 
-div#news ul {
+
+div.news ul {
+  float: left;
   list-style: none;
   margin: 0px;
-  margin-left: 0px;
+  margin-right: 20px;
   padding: 0px;
+  width:100%;
 }
 
-div#news a{
+div.index ul {
+    width: 400px;
+}
+
+div.news a{
   text-decoration: none;
 }
 
-div#news li {
+div.news li {
   margin: 0;
   padding: 10px 0px 9px 10px;
   list-style: none;

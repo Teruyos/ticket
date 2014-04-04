@@ -1,5 +1,25 @@
+
+  <div id="main" class="floatwrap">
+
+
+
 <h2>New Post</h2>
+
+
+<div id="newsArea">
 
 <%= render 'form' %>
 
 <%= link_to 'home', posts_path %>
+
+
+</div><!-- end div#newsArea --> 
+
+<% content_for :extend_index do %>
+
+<%= render 'news_sidebar' %>
+
+<% end %>
+
+
+  </div><!-- end div#main -->
