@@ -1,11 +1,20 @@
 Blog::Application.routes.draw do
   resources :categories
 
-
   devise_for :users
 
     resources :posts do
         resources :comments
+        resources :buys
+        
+        collection do
+            get 'search'
+        end
+        
+        member do
+            get 'edit2'
+            post 'confirm'
+        end
     end
     
     
@@ -22,17 +31,14 @@ Blog::Application.routes.draw do
   match 'cat_list/:cat' => 'posts#cat_list'
   match 'cat_list' => 'posts#cat_list'
   
-  match 'category_list' => 'posts#category_list'
+  match 'artist_list' => 'posts#artist_list'
+  match 'place_list' => 'posts#place_list'
   
   match 'contact' => 'contact#new', :as => 'contact', :via => :get
   match 'contact' => 'contact#create', :as => 'contact', :via => :post
   match 'contact:notice' => 'contact#index'
   
-  match 'news' => 'posts#news'
   match 'about' => 'posts#about'
-  match 'access' => 'posts#access'
-  match 'report' => 'posts#report'
-  match 'sanka' => 'posts#sanka'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

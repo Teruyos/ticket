@@ -1,50 +1,24 @@
 # coding: utf-8
 
 class PostsController < ApplicationController
-    before_filter :authenticate_user!
-    
-    
-    def news
-        @search_form = SearchForm.new (params[:search_form])
-        
-        @posts = Post.all(:order => "created_at DESC")
-        @posts = Post.scoped(:order => "created_at ASC").page(params[:page]).per(2)
-        
-        year = Time.now.year.to_s
-        month = Time.now.month.to_s
-        day = Time.now.day.to_s
-        
-        @search_date = Date::new(year.to_i, month.to_i, day.to_i)
-        
-        if @search_form.q.present?
-            fyear = params[:search_from][:year]
-            fmonth = params[:search_from][:month]
-            fday = params[:search_from][:day]
-            
-            tyear = params[:search_to][:year]
-            tmonth = params[:search_to][:month]
-            tday = params[:search_to][:day]
-            
-            from = Date::new(fyear.to_i, fmonth.to_i, fday.to_i)
-            to = Date::new(tyear.to_i, tmonth.to_i, tday.to_i)
-            
-            @posts = Post.scoped(:order => "created_at ASC", :conditions => {:updated_at => from...to}).page(params[:page]).per(2)
-            @posts = @posts.content_or_title_matches @search_form.q
-            
-        end
-        
-        @post = Post.find(1)
-        @cateories = Category.all
-        @cat = Category.find_by_id(@post.category_id)
-            
-    end
-
-
+    before_filter :authenticate_user!, only: :edit2
 
 def index
-    @posts = Post.all(:order => "created_at DESC")
+    #@posts = Post.all(:order => "created_at DESC")
+    @posts = Post.order(params[:sort])
+    #@posts = Post.scoped(:order => "category_id ASC").page(params[:page]).per(10)
+    @cateories = Category.all
 end
 
+def search
+    @search_form = SearchForm.new (params[:search_form])
+    @posts = Post.all(:order => "created_at DESC")
+    @posts = Post.scoped(:order => "created_at ASC").page(params[:page]).per(10)
+
+    if @search_form.q.present?
+     @posts = @posts.artist_or_content_or_title_matches @search_form.q
+    end
+end
 
   def day
     @posts = Post.all(:order => "created_at DESC")
@@ -88,8 +62,6 @@ end
     @posts = Post.where(["created_at between ? and ?", "#{y}-01-01 00:00:00", "#{y}-12-31 24:00:00"]).order("created_at DESC")
   end
 
-
-
     
     def show
         @post = Post.find(params[:id])
@@ -112,13 +84,32 @@ end
     end
     
     def edit
+        year = params[:year]
+        month = params[:month]
+        @post = Post.find(params[:id])
+        @buy = Post.find(params[:id]).buys.build
+        #@user = User.find(params[:id])
+        #@buys = User.find(params[:id]).buys.build
+    end
+    
+    def edit2
         @post = Post.find(params[:id])
     end
     
-    def update
+    def confirm
         @post = Post.find(params[:id])
+        @buy = Post.find(params[:id]).buys.find(params[:id])
+    end
+
+    def update        
+        @post = Post.find(params[:id])
+        @buy = Post.find(params[:id]).buys.build
+        
+#         @post.amount -= @buy.amount
         if @post.update_attributes(params[:post])
-          redirect_to posts_path, notice: '更新されました！'
+            @post.save(params[:post])
+        
+            redirect_to posts_path, notice: '更新されました！'
         else
           render action: 'edit'
         end
@@ -134,8 +125,16 @@ end
         @categories = Post.find(:all).group_by(&:category_id)
         @post = Post.scoped(:order => "created_at DESC").page(params[:page]).per(10)
         @post_categories = @post.group_by(&:category_id)
-       
+    end
 
+    def artist_list
+        @post = Post.scoped(:order => "created_at DESC").page(params[:page]).per(10)
+        @post_categories = @post.group_by(&:artist)
+    end
+
+    def place_list
+        @post = Post.scoped(:order => "created_at DESC").page(params[:page]).per(10)
+        @post_categories = @post.group_by(&:place)
     end
     
     def cat_list
@@ -147,6 +146,6 @@ end
             @posts = Post.find(:all, :conditions => { :category_id => cat })
             @cat = Category.find(cat)
         end
-
     end
+    
 end

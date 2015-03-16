@@ -177,8 +177,7 @@ border: none;
 div#header{
   padding:0;
   margin:0 auto;
-  width:950px;
-  height:180px;
+  width:950px
 
 }
 
@@ -186,7 +185,6 @@ div#headerArea{
   padding:0;
   margin:0 auto;
   width:950px;
-  height:130px;
 
 }
 
@@ -194,23 +192,7 @@ ul#headersubArea{
   padding:0;
   margin:0 auto;
   width:950px;
-  height:130px;
 
-}
-
-div#carousel-Area{
-  margin:0 auto;
-  width:950px;
-  height: 200px;
-}
-
-.active{
-  height: 200px;
-}
-
-div.carousel{
-  margin: 0 auto;
-  padding: 0 0 20px 0;
 }
 
 /* ===== ヘッダーH1 ===== */
@@ -233,37 +215,36 @@ div.header_txt h1{
 
 }
 
-
-/*ロゴ*/
-li.header_logo {
-  float: left; 
-  margin: 0;
-  padding: 0 0 0 20px;
-  border: none;
-  width: 250px;
-  height: 120px;
-
+.head-img img{
+  width: 950px;
+  height: 250px;
 }
 
-.head_title{
+.top-title{
+  padding: 0 0 0 15px;
+  margin: 0 10px 10px 0;
+  color: #FFFFFF;
+  background: #00b0ec;
+  font-size: 123.1%;
   font-weight:bold;
-  color:red;
+  line-height: 36px;
+  height: 40px;
 }
+
 
 /*ヘッダーナビ*/
-li.header_navi {
-  float: right; 
-  margin: 0;
-  padding: 0 0 0 20px;
-  border: none;
-  width: 650px;
-  height: 120px;
-}
+.header_navi li {
+  float: left;
+  width: 100px;
+  margin: 0 1px;
+  padding: 10px;
+  background-color: #535353;
+  text-align: center;
+  color: white;
+} 
 
-li.header_navi li{
-  float: right;
-  padding: 2px 30px 2px;
-
+.header_navi li :visited{
+  color: white;
 }
 
 
@@ -365,7 +346,6 @@ div#pankuzu p{
 
 /* ===== メインコンテンツ ===== */
 div#content{
-  padding: 20px 0 50px 0;
   margin:0 auto;
   width:100%;
 
@@ -381,23 +361,20 @@ div#contentArea{
 
 
 div#main{
-  float: right; 
+  float: left; 
   padding: 0;
   margin: 0 auto;
-  width: 720px;
+  width: 750px;
   font-size: 108%;
 }
 
 
 div#main h2{
-  padding: 0 0 0 15px;
-  margin: 0 0 10px 0;
-  color: #FFFFFF;
-  background: url(/assets/h2.jpg) no-repeat;
+  margin: 15px 0 10px;
+  color: #000000;
   font-size: 123.1%;
   font-weight:bold;
   line-height: 36px;
-  height: 40px;
 }
 
 div#main h3{
@@ -483,7 +460,7 @@ table.sample{
 /* ===== サイドバー ===== */
 
 div#side{
-  float: left; 
+  float: right; 
   padding: 0;
   margin: 0;
   width: 200px;
@@ -494,9 +471,7 @@ div#side{
 }
 
 div#side div{
-  background: #99ff99;
   margin-bottom: 10px;
-  border-radius:5px;
 }
 
 
@@ -509,21 +484,8 @@ div#side p{
   border-bottom: 1px dotted #B1B6B9;
 }
 
-div#side p:last-child {
-    border-bottom: none;
-}
-
-
-div#side img{
-  padding: 5px;
-  text-align: center;
-}
-
 div#side li{
   font-family: "Meiryo";
-  margin: 5px;
-  font-size: 130%; 
-
 }
 
 div#side a:link {
@@ -534,6 +496,7 @@ div#side a:link {
 div#side a:visited {
   color: black;
   font-family: "Meiryo", bold;
+  
 }
 
 .donate_content .image{
@@ -552,39 +515,215 @@ div#side a:visited {
 
 /* ===== トップお知らせ ===== */
 
-div#newsArea{
-  clear: both;
+.top_list th,
+.top_list td{
+  padding: 3px;
+  border: 1px solid gray; 
+}
+
+
+/*　トッププロジェクト　*/
+.project-box{
   float: left;
-  margin: 0;
-  padding:0;
-  width: 720px;
+  width: 220px;
+  height: 380px;
+  background: rgba(199, 239, 252, 0.55);
+    margin: 0px 10px 20px 10px;
+  padding: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;　
+  -ms-border-radius: 5px;　
+  -o-border-radius: 5px;
+  }
+
+.project-content{
+    font-size: 13px;
+  }
+.planner{
+  text-align: right;
+  font-weight: bold;
+  padding: 3px;
+}
+
+#main .project-box img{
+  width: 200px;
+  height: 140px;
+  margin: 10px;
+}
+
+.project-title{
+  font-size: 15px;
+  color: #035AAE;
+  text-align: center;
+}
+
+.meter{
+  background-color: white;
+  width: 220px;
+  height: 20px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 2px 2px 1px rgba(51, 51, 51, 0.26);
+  -webkit-box-shadow: 2px 2px 1px rgba(51, 51, 51, 0.26);
+
+}
+
+.meter-stat{
+  position: relative;
+  top: -20px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FAFDBD), to(#FFF13A));
+  background: -moz-linear-gradient(#FAFDBD, #FFF13A);
+  width: 80%;
+  height: 20px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px
 }
 
 
-div.news ul {
+.achieve div{
+  font-size: 15px;
+  margin: -10px 0 10px 0;
+  padding: 2px 6px 0 6px;
+  text-align: center;
   float: left;
-  list-style: none;
-  margin: 0px;
-  margin-right: 20px;
-  padding: 0px;
-  width:100%;
+  border-right: 1px solid #ccc;
+
 }
 
-div.index ul {
-    width: 400px;
+.achieve div:last-child {
+    border-right: none;
 }
 
-div.news a{
-  text-decoration: none;
+
+
+/*　プロジェクト詳細　*/
+.project-title2{
+  font-size: 123.1%;
+  font-weight: bold;
+  line-height: 36px;
+  color: #535353;
 }
 
-div.news li {
-  margin: 0;
-  padding: 10px 0px 9px 10px;
-  list-style: none;
-  border-bottom: 1px dotted #B1B6B9;
+.achieve2{
+  float: left;
+  width: 280px;
+  margin-left: 20px;
 }
 
+.achieve2 div{
+  font-size: 20px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.achieve2 .details{
+  display: inline;
+  font-size: 28px;
+  border-bottom: none;
+}
+
+.meter2{
+  float: left;
+  background-color: rgba(51, 51, 51, 0.26);;
+  width: 280px;
+  height: 30px;
+  margin-left: 20px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px;
+  -moz-box-shadow: 2px 2px 1px rgba(51, 51, 51, 0.26);
+  -webkit-box-shadow: 2px 2px 1px rgba(51, 51, 51, 0.26);
+
+}
+
+.meter-stat2{
+  position: relative;
+  left: 445px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#FAFDBD), to(#FFF13A));
+  background: -moz-linear-gradient(#FAFDBD, #FFF13A);
+  width: 250px;
+  height: 30px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -o-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -khtml-border-radius: 3px;
+  border-radius: 3px
+}
+
+.project-img2{
+  float: left;
+}
+
+.planner2{
+  float: right;
+  width: 200px;
+}
+
+.planner-title {
+  padding: 0 0 0 15px;
+  margin: 20px 10px 10px 0;
+  color: #FFFFFF;
+  background: #535353;
+  font-size: 123.1%;
+  font-weight:bold;
+  line-height: 36px;
+  height: 40px;
+}
+
+.commit-botton {
+display: block;
+font-size: 20px;
+width: 85%;
+font-family: "Tenderness";
+text-align: center;
+padding: 14px;
+margin: 10px;
+color: #fff;
+cursor: pointer;
+text-shadow: 0 -1px 1px rgba(0, 0, 0, .4);
+background: #428ec9;
+border-radius: 5px;
+box-shadow: 0 1px 1px #fff;
+background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 176, 236, 0.37)), to(#00b0ec));
+background: -moz-linear-gradient(rgba(0, 176, 236, 0.37), #00b0ec);
+-moz-border-radius: 5px;
+}
+
+.project-content2{
+    clear: both;
+    padding: 20px;
+    font-size: 13px;
+  }
+
+.reward{
+  float: right;
+  width: 180px;
+  padding: 10px;
+  margin:10px 0;
+  background-color: rgba(0, 176, 236, 0.17);
+}
+
+.reward-price{
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.reward-content{
+  padding: 13px;
+  font-size: 15px;
+}
 /* ===== ページのトップへ ===== */
 
 
@@ -600,25 +739,26 @@ div#pagetop {
 
 /* ===== フッタ ===== */
 div#footer {
-  background: #F3F3F3 url(/assets/footer_bg.jpg) repeat-x;
+  background: #535353;
   width: 100%;
   height: 212px;
   margin: 0 auto;
   padding: 0;
+/*  position: absolute;
+  bottom: 0;*/
 }
 
 div#footerArea{
   padding:0;
   margin:0 auto;
   width:950px;
-
 }
 
 div.footer_navi {
   float: left; 
   padding: 30px 0 0 5px;
   margin: 0 auto;
-  width: 235px;
+  width: 230px;
   text-align: left;
   color: #BBBBBB;
   height: 148px;
@@ -636,7 +776,7 @@ div.footer_navi ul {
 
 div.footer_navi a{
   text-decoration: none;
-  color: #BBBBBB;
+  color: white;
 }
 
 div.footer_navi a:hover{
@@ -648,7 +788,7 @@ div.footer_navi li {
   margin: 0;
   padding: 0 0 0 16px;
   list-style: none;
-  background: url(/assets/footernavi_list.gif) no-repeat;
+  background: url(/assets/sankaku.png) no-repeat;
   font-size: 93%;
   line-height: 1.6em;
 }
@@ -670,7 +810,7 @@ div.footer_logo p{
   padding: 0 0 0 2px;
   line-height: 1.6em;
   font-size: 85%;
-  color: #BBBBBB;
+  color: white;
 
 }
 
@@ -680,7 +820,7 @@ div.footer_copy {
   height: 30px;
   line-height: 2.6em;
   font-size: 85%;
-  color: #BBBBBB;
+  color: white;
   margin: 0 auto;
   padding: 0;
   text-align: center;

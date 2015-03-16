@@ -1,10 +1,9 @@
 class Post < ActiveRecord::Base
     
-    default_scope :order => 'created_at ASC'
+    #default_scope :order => 'created_at ASC'
     # paginates_per 5
 
-  attr_accessible :content, :title
-
+  attr_accessible :content, :title, :artist, :place, :date, :price, :amount,:category_id
   has_many :comments
   
   attr_accessible :avatar
@@ -14,13 +13,17 @@ class Post < ActiveRecord::Base
   validates :content, :presence => true,
                       :length => { :minimum => 5 }
                       
-  validates :avatar, :presence => true
+#validates :avatar, :presence => true
 
-  scope :content_or_title_matches, lambda {|q|
-  where 'content like :q or title like :q', :q => "%#{q}%"
+  scope :artist_or_content_or_title_matches, lambda {|q|
+  where 'artist like :q or content like :q or title like :q', :q => "%#{q}%"
   }
 
-  attr_accessible :content, :title, :category_id
   has_many :categories
+  has_many :buys
+  accepts_nested_attributes_for :categories
+  attr_accessible :categories_attributes
+  accepts_nested_attributes_for :buys
+  attr_accessible :buys_attributes
 
 end

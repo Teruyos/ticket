@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Blog" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "Ticket x Ticket" %></title>
     <%= csrf_meta_tags %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
@@ -21,57 +21,35 @@
   <body>
 
   <div id="header">
-   <div class="header_txt"><h1>ネパールと日本をつなぐ　ヒマラヤ保全協会</h1></div>
+   <div class="header_txt"><h1><%= link_to 'Rails-ticket', root_path %></h1>
+   <p></p></div>
   
   <div id="headerArea">
 
-  <ul id="headersubArea">
-  
-    <li class="header_logo"><%= link_to image_tag('logo.gif', :size => '120x120'), posts_path %></li>
-    <li class="header_navi">
-      <ul>
-        <li>English</li>
-        <li><%= link_to 'アクセス', access_path %></li>
-        <li><%= link_to 'お問い合わせ', contact_path %></li>
-        <li>サイトマップ</li>
-      </ul>
-      <ul>
-       <li class="head_title">ヒマラヤ保全協会は、ネパールにて地域住民が主体になった植林事業に取り組んでいます。</li>
-      </ul>
-      <ul>
-        <li>
-          <%= link_to image_tag('email.jpg' , :size => '250x120'), contact_path %></li>
-        </li>
-      </ul>
-    </li>
-    </ul>
-  
-
-    <div id="gnavi">
-     <ul id="globalnavi">
-      <li><%= link_to 'Home', posts_path %></li>
-      <li><%= link_to 'News', news_path %></li>
-      <li><%= link_to '私たちについて', about_path %></li>
-      <li><%= link_to '支援活動', report_path %></li>
-      <li><%= link_to '参加する', sanka_path %></li>
-      <li><%= link_to '募金・寄付', year_path %></li>
-      </ul>
-    </div>
-    <!-- end div#gnavi -->
-
+  <ul class="header_navi">
+    <li><%= link_to 'Home', root_path %></li>
+    <li><%= link_to 'Artist', artist_list_path %></li>
+    <li>Event</li>
+    <li>Date</li>
+    <li><%= link_to 'Genres', category_list_path %></li>
+  </ul>
   </div><!-- end div#headerArea -->
   </div><!-- end div#header -->
+  
+<%= form_for @search_form, :url => search_posts_path,
+  :html => {:method => :get} do |f| %>
+  <%= f.search_field :q %>
+  <%= f.submit 'Search' %>
+<% end %>
 
   <div id="content" class="floatwrap">
   <div id="contentArea" class="floatwrap">
 
 <%= yield :extend_index %>
 
- <div id="main" class="floatwrap">
 
 <%= yield %>
 
-  </div><!-- end div#main -->
 
 <%= yield :extend_index2 %>
 
@@ -83,10 +61,20 @@
 
     <div class="footer_navi">
       <ul>
-      <li><%= link_to 'Home', posts_path %></li>
-      <li><%= link_to '新規投稿', new_post_path %></li>
+      <li><%= link_to 'About', about_path %></li>
+      <li><%= link_to 'How to buy tickets', posts_path %></li>
+      <li><%= link_to 'How to serch tickets', posts_path %></li>
       </ul>
     </div>
+
+    <div class="footer_navi">
+      <ul>
+      <li><%= link_to 'Category list', category_list_path %></li>
+      <li><%= link_to 'Artist list', artist_list_path %></li>
+      <li><%= link_to 'place list', place_list_path %></li>
+      </ul>
+    </div>
+
 
     <div class="footer_navi">
       <ul>
@@ -98,18 +86,19 @@
 
     <div class="footer_navi">
       <ul>
-        <li><%= link_to 'カテゴリ一覧', category_list_path %></li>
-        <li><%= link_to 'カテゴリ管理', categories_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to "Sign out", destroy_user_session_path, :method => :delete %></li>
+          <li><%= link_to 'Register ticket(ONLY owner)', new_post_path %></li>
+          <li><%= link_to 'Register Category(ONLY owner)', categories_path %></li>
+        <% else %>
+          <li><%= link_to 'Sign in', new_user_session_path %></li>
+        <% end %>
       </ul>
+    </li>
+    </ul>
     </div>
 
-    <div class="footer_logo">
-      <p>〒150-0002<br>
-        東京都渋谷区渋谷1-1-1<br>
-        TEL:03-1234-5678</p>
-    </div>
-
-  <div class="footer_copy">Copyright (C) 2014 ふなっしー All Rights Reserved.</div>
+  <div class="footer_copy">Copyright (C) 2014 five-taste All Rights Reserved.</div>
 
   </div><!-- end div#footerArea -->
   </div><!-- end div#footer -->

@@ -4,11 +4,6 @@
 
 <div id="newsArea">
 
-<p class="bbold16">登録数:
-<%= @categories.size %></p>
-
-<p><%= paginate @post %></p>
-
 <div id="news">
   <ul>
 
@@ -43,6 +38,6 @@
 
 <% content_for :extend_index do %>
 
-<%= render 'news_sidebar' %>
+<%= render 'sidebar' %>
 
 <% end %>

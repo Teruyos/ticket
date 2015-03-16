@@ -11,7 +11,7 @@ end
 
 
 group :production do
-  gem 'pg'
+  #gem 'pg'
   gem 'thin' 
 end
 
@@ -52,3 +52,4 @@ gem 'jquery-rails'
 
 gem 'devise', '2.2.4'
 gem "paperclip", "~> 3.0" 
+#gem 'cancancan', '~> 1.10'

@@ -35,7 +35,7 @@
 <% end %>
 
 <%= link_to post.title, post_path(post) %> (<%= post.comments.size %>)
-<%= @cat.name %>
+<%= post.categories.name %>
 
 <%= link_to 'Edit', edit_post_path(post) %>
 <%= link_to 'Delete', post, :confirm => 'Sure?',

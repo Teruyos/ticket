@@ -1,0 +1,66 @@
+
+
+<h2>Edit ticket</h2>
+
+<%= form_for(@post) do |f| %>
+
+<% if @post.errors.any? %>
+<ul>
+<% @post.errors.full_messages.each do |msg| %>
+<li><%= msg %></li>
+<% end %>
+</ul>
+<% end %>
+
+<div class="field">
+	<%= f.label :artist %>
+	<%= f.text_field :artist %>
+</div>
+
+<div class="field">
+	<%= f.label :title %>
+	<%= f.text_field :title %>
+</div>
+
+<div class="field">
+	<%= f.label :place %>
+	<%= f.text_field :place %>
+</div>
+
+<div>
+  <%= f.label :category_id %>
+  <%= f.collection_select :category_id, Category.all, :id, :name %>
+</div>
+
+<div class="field">
+  <label>講演日時</label>
+  <%= f.datetime_select :date %>
+</div>
+
+<div class="field">
+	<%= f.label :price %>
+	<%= f.text_field :price %>
+</div>
+
+<div class="field">
+	<%= f.label :amount %>
+	<%= f.text_field :amount %>
+</div>
+
+<div class="field">
+	<%= f.label :content %>
+	<%= f.text_area :content, :rows => 5 %>
+</div>
+
+<div class="field">
+  <%= f.label :avatar %>
+  <%= f.file_field :avatar %>
+</div>
+
+<div class="actions">
+	<%= f.submit %>
+</div>
+
+<% end %>
+
+<%= link_to 'home', posts_path %>

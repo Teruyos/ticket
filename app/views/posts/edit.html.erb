@@ -1,5 +1,57 @@
-<h2>Edit Post</h2>
 
-<%= render 'form' %>
 
-<%= link_to 'home', posts_path %>
+<h2>商品購入</h2>
+
+<table style="border-spacing:20px 10px;border-collapse : separate ">
+<tbody>
+<tr>
+	<th>Artist</th>
+	<td><%= @post.artist %></td>
+</tr>
+<tr>
+	<th>Title</th>
+	<td><%= @post.title %></td>
+</tr>
+<tr>
+	<th>Place</th>
+	<td><%= @post.place %></td>
+</tr>
+<div>
+	<th>Category</th>
+	<td><%= @post.category_id %></td>
+</div>
+
+<tr>
+	<th>Date</th>
+	<td><%= @post.date %></td>
+</tr>
+
+<tr>
+	<th>Price</th>
+	<td><%= @post.price %></td>
+</tr>
+
+<tr>
+	<th>Amount</th>
+	<td><%= @post.amount %></td>
+</tr>
+
+<tr>
+	<th>Content</th>
+	<td><%= @post.content %></td>
+</tr>
+</tbody>
+</table>
+
+<%= form_for([@post, @buy]) do |f| %> <!-- postに紐づいたbuyのフォームを作りたい場合の記述 -->
+      <%= f.label :amount, "購入枚数" %>
+      <%= f.text_field :amount %>
+ <% end %>      
+<%= form_for @post do |f| %> 
+     <%= f.hidden_field :amount, :value => @post.amount - 5  %>
+
+<div class="actions">
+	<%= f.submit :value => "購入する" %>
+</div>
+
+ <% end %>

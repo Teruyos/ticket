@@ -1,0 +1,59 @@
+<div id="main" class="floatwrap">
+
+<h2>商品一覧</h2>
+
+<% if @posts.present? %>
+
+<table class="top_list">
+	<tbody>
+		<tr>
+			<th>Date</th>
+			<th>Artist</th>
+			<th>Event</th>
+			<th>Place</th>
+			<th>Category</th>
+			<th>Price</th>
+			<th>Amont</th>
+			<th>Order</th>
+			<th>Cat_i</th>
+		</tr>
+
+	<% @posts.each do |post| %>
+		<tr>	
+			<td><%= post.date %></td>
+			<td><%= post.artist %></td>
+			<td><%= link_to post.title, post_path(post) %></td>
+			<td><%= post.place %></td>
+			<td><%= post.categories.name %></td>
+			<td class="price"><%= post.price %></td>
+			<td class="remainder"><%= post.amount %></td>
+			<td class="order"><%= link_to '注文', edit_post_path(post) %></td>
+
+			<% if user_signed_in? %>
+
+			<td><%= link_to 'Edit', edit2_post_path(post) %></td>
+			<td>
+				<%= link_to 'Delete', post, :confirm => 'Sure?',
+                            :method => :delete,
+                            :remote => true %>
+			</td>
+			<% end %>
+			<td><a href="/cat_list/<%= post.category_id %>"><%= post.category_id %></a></td>
+		</tr>
+	<% end %>
+
+	</tbody>
+</table>
+
+<% else %>
+<p>Sorry! Nothing to hit.</p>
+
+<% end %>
+
+<% content_for :extend_index do %>
+
+<%= render 'sidebar' %>
+
+<% end %>
+
+</div> <!-- end div#main  -->
