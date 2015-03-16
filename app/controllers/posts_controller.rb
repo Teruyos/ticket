@@ -10,16 +10,6 @@ def index
     @cateories = Category.all
 end
 
-def search
-    @search_form = SearchForm.new (params[:search_form])
-    @posts = Post.all(:order => "created_at DESC")
-    @posts = Post.scoped(:order => "created_at ASC").page(params[:page]).per(10)
-
-    if @search_form.q.present?
-     @posts = @posts.artist_or_content_or_title_matches @search_form.q
-    end
-end
-
   def day
     @posts = Post.all(:order => "created_at DESC")
     @post_days = @posts.group_by { |t| t.created_at.beginning_of_day }
@@ -97,18 +87,17 @@ end
     end
     
     def confirm
+        @buy_amount = params[:buy][:amount]
         @post = Post.find(params[:id])
-        @buy = Post.find(params[:id]).buys.find(params[:id])
+        @post.amount -= @buy_amount.to_i
+        @buy = Post.find(params[:id]).buys.build
     end
 
-    def update        
+    def update
         @post = Post.find(params[:id])
         @buy = Post.find(params[:id]).buys.build
-        
-#         @post.amount -= @buy.amount
         if @post.update_attributes(params[:post])
             @post.save(params[:post])
-        
             redirect_to posts_path, notice: '更新されました！'
         else
           render action: 'edit'

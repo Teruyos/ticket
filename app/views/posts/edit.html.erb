@@ -43,15 +43,13 @@
 </tbody>
 </table>
 
-<%= form_for([@post, @buy]) do |f| %> <!-- postに紐づいたbuyのフォームを作りたい場合の記述 -->
+<%= form_for([@post, @buy],:url => {:action => "confirm"}) do |f| %> <!-- postに紐づいたbuyのフォームを作りたい場合の記述 -->
       <%= f.label :amount, "購入枚数" %>
       <%= f.text_field :amount %>
- <% end %>      
-<%= form_for @post do |f| %> 
-     <%= f.hidden_field :amount, :value => @post.amount - 5  %>
+      <%= f.submit :value => "確認" %> 
+ <% end %>   
 
-<div class="actions">
-	<%= f.submit :value => "購入する" %>
-</div>
 
- <% end %>
+<!-- <div><%= link_to '確認', confirm_post_path %></div> -->
+
+

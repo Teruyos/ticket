@@ -25,5 +25,4 @@ class Post < ActiveRecord::Base
   attr_accessible :categories_attributes
   accepts_nested_attributes_for :buys
   attr_accessible :buys_attributes
-
 end

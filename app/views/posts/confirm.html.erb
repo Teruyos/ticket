@@ -1,5 +1,6 @@
 <h2>商品購入</h2>
 
+<%= form_for(@post) do |f| %>
 
 <div class="field">
 	<p>Artist</p>
@@ -32,8 +33,10 @@
 </div>
 
 <div class="field">
-	<p>Amount</p>
+	<p>購入後の残枚数</p>
 	<%= @post.amount %>
+	<%= f.hidden_field :amount, :value => @post.amount %>
+
 </div>
 
 <div class="field">
@@ -43,15 +46,14 @@
 
 <div class="field">
 	<p>購入枚数</p>
-	<%= @buy %>
+	<%= @buy_amount %>
+	 <%= f.fields_for :buys do |f| %>
+ 	 <%= f.text_field :amount, :value => @buy_amount %>
+	<% end %>
+
 </div>
 
-<%= form_for(@post) do |f| %> 
-
-<div class="actions">
-	<%= f.submit %>
-</div>
-
- <% end %>
+	<%= f.submit :value => "購入する" %> 
+<% end %>
 
 <%= link_to 'home', posts_path %>
